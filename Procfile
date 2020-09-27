@@ -1,1 +1,1 @@
-web: guinicorn matewa.wsgi
+web: gunicorn matewa.wsgi
