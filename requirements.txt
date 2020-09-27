@@ -1,14 +1,20 @@
+asgiref @ file:///tmp/build/80754af9/asgiref_1594338739818/work
 boto3==1.15.6
 botocore==1.18.6
 certifi==2020.6.20
+dj-database-url==0.5.0
+Django @ file:///tmp/build/80754af9/django_1600355803933/work
 django-crispy-forms==1.9.2
+django-heroku==0.3.1
 django-storages==1.10.1
 gunicorn==20.0.4
 jmespath==0.10.0
 Pillow==7.2.0
+psycopg2 @ file:///tmp/build/80754af9/psycopg2_1594305108220/work
 python-dateutil==2.8.1
 pytz==2020.1
 s3transfer==0.3.3
 six==1.15.0
 sqlparse==0.3.1
 urllib3==1.25.10
+whitenoise==5.2.0
