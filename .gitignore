@@ -1,3 +1,4 @@
 matewa/media/
 *.pyc
 environment_var.txt
+db.sqlite3
