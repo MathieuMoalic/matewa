@@ -33,12 +33,18 @@ def create_word(word: schemas.WordCreate, db: Session = Depends(get_db)):
 
 
 @app.get("/word/{word_id}/", response_model=schemas.Word)
-def read_word(word_id: int, db: Session = Depends(get_db)):
+def get_word(word_id: int, db: Session = Depends(get_db)):
     word = crud.get_word(db, word_id=word_id)
     return word
 
 
+@app.get("/random_word/", response_model=schemas.Word)
+def get_random_word(db: Session = Depends(get_db)):
+    word = crud.get_random_word(db)
+    return word
+
+
 @app.get("/words/", response_model=List[schemas.Word])
-def read_words(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+def get_words(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     words = crud.get_words(db, skip=skip, limit=limit)
     return words

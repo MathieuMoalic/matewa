@@ -1,3 +1,5 @@
+import random
+
 from sqlalchemy.orm import Session
 
 from . import models, schemas
@@ -12,6 +14,12 @@ def create_word(db: Session, word: schemas.WordCreate):
 
 
 def get_word(db: Session, word_id):
+    return db.query(models.Word).filter(models.Word.id == word_id).first()
+
+
+def get_random_word(db: Session):
+    a = db.query(models.Word).count()
+    word_id = random.randint(1, a)
     return db.query(models.Word).filter(models.Word.id == word_id).first()
 
 

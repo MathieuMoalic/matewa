@@ -1,2 +1,4 @@
 /.vscode
 /node_modules
+backend/env
+backend/sql_app.db

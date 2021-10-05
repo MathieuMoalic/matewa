@@ -21,9 +21,9 @@
 </script>
 
 <main>
-    <input bind:value={word.en} placeholder="word_en" />
-    <input bind:value={word.pl} placeholder="word_pl" />
-    <input bind:value={word.fr} placeholder="word_fr" />
+    <input bind:value={word.en} placeholder="Word in English" />
+    <input bind:value={word.pl} placeholder="Word in Polish" />
+    <input bind:value={word.fr} placeholder="Word in French" />
     <button
         type="submit"
         on:click|preventDefault={addWord}
