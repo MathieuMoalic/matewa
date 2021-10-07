@@ -1,10 +1,13 @@
 from typing import List
+import random
 
 from fastapi import Depends, FastAPI, HTTPException
+from fastapi.encoders import jsonable_encoder
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
+from fastapi_crudrouter import SQLAlchemyCRUDRouter
 
-from . import crud, models, schemas
+from . import models, schemas
 from .database import SessionLocal, engine
 
 models.Base.metadata.create_all(bind=engine)
@@ -27,24 +30,21 @@ def get_db():
         db.close()
 
 
-@app.post("/word/", response_model=schemas.Word)
-def create_word(word: schemas.WordCreate, db: Session = Depends(get_db)):
-    return crud.create_word(db=db, word=word)
-
-
-@app.get("/word/{word_id}/", response_model=schemas.Word)
-def get_word(word_id: int, db: Session = Depends(get_db)):
-    word = crud.get_word(db, word_id=word_id)
-    return word
+router = SQLAlchemyCRUDRouter(
+    schema=schemas.Word,
+    create_schema=schemas.WordCreate,
+    db_model=models.Word,
+    db=get_db,
+    prefix="word",
+    delete_all_route=False,
+)
 
 
 @app.get("/random_word/", response_model=schemas.Word)
 def get_random_word(db: Session = Depends(get_db)):
-    word = crud.get_random_word(db)
-    return word
+    a = db.query(models.Word).count()
+    word_id = random.randint(1, a)
+    return db.query(models.Word).filter(models.Word.id == word_id).first()
 
 
-@app.get("/words/", response_model=List[schemas.Word])
-def get_words(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    words = crud.get_words(db, skip=skip, limit=limit)
-    return words
+app.include_router(router)

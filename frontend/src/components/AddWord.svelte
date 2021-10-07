@@ -1,22 +1,12 @@
 <script lang="ts">
+    import { postWord } from "../api/crud";
     let word = {
         pl: "",
         en: "",
         fr: "",
     };
-    let addWord = () => {
-        const request = new Request("http://localhost:8000/word/", {
-            method: "POST",
-            body: JSON.stringify(word),
-            headers: new Headers({
-                "Content-Type": "application/json",
-            }),
-        });
-
-        // pass request object to `fetch()`
-        fetch(request)
-            .then((res) => res.json())
-            .then((res) => console.log(res));
+    let addWord = async () => {
+        await postWord(word);
     };
 </script>
 

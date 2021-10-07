@@ -1,4 +1,7 @@
 /.vscode
 /node_modules
 backend/env
-backend/sql_app.db
+backend/matewa.db
+*.pyc
+backend/backend/__pycache__/crud.cpython-38.pyc
+ 

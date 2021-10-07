@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Nav, NavItem, NavLink } from "sveltestrap";
 
-    export let currentTab = "home";
+    export let currentTab = "listWords";
 </script>
 
 <Nav tabs>

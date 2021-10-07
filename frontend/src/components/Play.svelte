@@ -1,22 +1,18 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import { Progress } from "sveltestrap";
+    import { getRandomWord } from "../api/crud";
     let word = { en: "", pl: "", fr: "" };
     let input_word = { en: "", pl: "", fr: "" };
     onMount(async () => {
-        fetch("http://localhost:8000/random_word/")
-            .then((response) => response.json())
-            .then((data) => {
-                word = data;
-            })
-            .catch((error) => {
-                console.log(error);
-                return [];
-            });
+        const res = await getRandomWord();
+        word = res;
     });
     let checkWord = () => {
         if (input_word.en === word.en) {
             console.log("correct");
+        } else {
+            console.log("incorrect");
         }
     };
     let timeLeft = 100;
