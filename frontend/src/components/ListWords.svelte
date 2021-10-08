@@ -17,10 +17,12 @@
     <Container>
         {#each words as word}
             <Row>
-                <Col>🇬🇧 {word.en}</Col>
-                <Col>🇫🇷 {word.fr}</Col>
-                <Col>🇵🇱 {word.pl}</Col>
-                <Col xs="1"><Icon name="wrench" /></Col>
+                <Col xs="1">
+                    <UpdateWord {word} />
+                </Col>
+                <Col xs="auto">🇬🇧 {word.en}</Col>
+                <Col xs="auto">🇫🇷 {word.fr}</Col>
+                <Col xs="auto">🇵🇱 {word.pl}</Col>
             </Row>
         {/each}
     </Container>

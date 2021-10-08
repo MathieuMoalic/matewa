@@ -3,5 +3,3 @@
 backend/env
 backend/matewa.db
 *.pyc
-backend/backend/__pycache__/crud.cpython-38.pyc
- 
