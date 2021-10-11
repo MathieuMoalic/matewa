@@ -6,9 +6,6 @@ from fastapi.encoders import jsonable_encoder
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from fastapi_crudrouter import SQLAlchemyCRUDRouter
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-from jose import JWTError, jwt
-from passlib.context import CryptContext
 
 from . import models, schemas
 from .database import SessionLocal, engine, get_db
@@ -24,6 +21,17 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+db = SessionLocal()
+if db.query(models.Word).count() == 0:
+    with open("words2.txt", "r") as f:
+        for line in f:
+            en, fr, pl = line.strip().split(",")
+            en, fr, pl = en.capitalize(), fr.capitalize(), pl.capitalize()
+            word = models.Word(**{"en": en, "fr": fr, "pl": pl})
+            db.add(word)
+            db.commit()
+            db.refresh(word)
 
 
 @app.get("/random_word/", response_model=schemas.Word)
