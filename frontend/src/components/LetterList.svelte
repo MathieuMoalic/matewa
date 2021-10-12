@@ -1,6 +1,7 @@
 <script lang="ts">
     import { Button, Col, Container, Row, Badge } from "sveltestrap";
-    import { shuffled_word, word, input_word } from "../store";
+    import { shuffled_word, input_word, word } from "../store";
+    import LetterButton from "./LetterButton.svelte";
     type ButtonColor = "primary";
     let color: ButtonColor = "primary";
     $shuffled_word = $word.pl
@@ -12,22 +13,45 @@
     let addLetter = (letter: string) => {
         $input_word += letter;
     };
-    console.log($word);
+    let removeLetter = () => {
+        $input_word = $input_word.slice(0, $input_word.length - 1);
+    };
+    let clearInput = () => {
+        $input_word = "";
+    };
 </script>
 
 <Row>
-    {#each $shuffled_word as letter}
+    {#each $shuffled_word as char}
         <Col>
-            <Button
-                outline
-                on:click={function () {
-                    addLetter(letter);
+            <LetterButton
+                addLetter={function () {
+                    addLetter(char);
                 }}
-                {color}>{letter}</Button
-            >
+                {char}
+            />
         </Col>
     {/each}
 </Row>
-{#each $input_word as letter}
-    <Badge>{letter}</Badge>
-{/each}
+<Row>
+    <Col>
+        <Button
+            on:click={function () {
+                removeLetter();
+            }}
+            {color}
+        >
+            Remove
+        </Button>
+    </Col>
+    <Col>
+        <Button
+            on:click={function () {
+                clearInput();
+            }}
+            {color}
+        >
+            Clear
+        </Button>
+    </Col>
+</Row>

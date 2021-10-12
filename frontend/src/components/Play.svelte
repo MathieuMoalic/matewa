@@ -1,30 +1,28 @@
 <script lang="ts">
-    import { onMount } from "svelte";
+    import { onDestroy } from "svelte";
+    // import type { WordType } from "../types/word.type";
+
+    import { word, shuffled_word, input_word } from "../store";
+    import WordInput from "./WordInput.svelte";
+    import LetterList from "./LetterList.svelte";
+    import CheckInput from "./CheckInput.svelte";
     import { getRandomWord } from "../api/crud";
-    let word = { en: "", pl: "", fr: "" };
-    let input_word = "";
-    onMount(async () => {
-        const res = await getRandomWord();
-        word = res;
+
+    async function newWord() {
+        $word = await getRandomWord();
+    }
+    let newWordPromise = newWord();
+    onDestroy(() => {
+        $word = { en: "", pl: "", fr: "" };
+        $input_word = "";
+        $shuffled_word = "";
     });
-    let checkWord = () => {
-        if (input_word === word.pl) {
-            console.log("correct");
-        } else {
-            console.log("incorrect");
-        }
-    };
 </script>
 
-<main>
-    <div>Translate 🇫🇷 '{word.fr}' in 🇵🇱 ({word.pl})</div>
-    <input
-        bind:value={input_word}
-        placeholder="Translate 🇫🇷 '{word.fr}' in 🇵🇱 "
-    />
-    <button
-        type="submit"
-        on:click|preventDefault={checkWord}
-        class="btn btn-primary">Check</button
-    >
-</main>
+{#await newWordPromise}
+    <p>...waiting</p>
+{:then _}
+    <WordInput />
+    <LetterList />
+    <CheckInput />
+{/await}

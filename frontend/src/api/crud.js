@@ -1,5 +1,6 @@
 import Api from "./Api"
 
+
 export const getWordList = async () => {
     try {
         const response = await Api.get("/word?skip=0&limit=100");
