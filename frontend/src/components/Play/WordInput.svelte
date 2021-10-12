@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Button, Card, CardBody } from "sveltestrap";
-    import { word, input_word } from "../store";
+    import { word, input_word } from "../../store";
 </script>
 
 <main>

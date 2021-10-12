@@ -1,9 +1,15 @@
 <script lang="ts">
+    import { input_word } from "../../store";
+
     export let char: string;
-    export let addLetter;
+    let disabled = true;
+
+    function addLetter() {
+        $input_word += char;
+    }
 </script>
 
-<button on:click={addLetter}>{char}</button>
+<button {disabled} on:click={addLetter}>{char}</button>
 
 <style>
     button {

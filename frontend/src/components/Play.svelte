@@ -3,9 +3,9 @@
     // import type { WordType } from "../types/word.type";
 
     import { word, shuffled_word, input_word } from "../store";
-    import WordInput from "./WordInput.svelte";
-    import LetterList from "./LetterList.svelte";
-    import CheckInput from "./CheckInput.svelte";
+    import WordInput from "./Play/WordInput.svelte";
+    import Keyboard from "./Play/Keyboard.svelte";
+    import CheckInput from "./Play/CheckInput.svelte";
     import { getRandomWord } from "../api/crud";
 
     async function newWord() {
@@ -23,6 +23,6 @@
     <p>...waiting</p>
 {:then _}
     <WordInput />
-    <LetterList />
+    <Keyboard />
     <CheckInput />
 {/await}

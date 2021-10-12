@@ -10,10 +10,12 @@
 </script>
 
 <Styles />
-<main>
+
+<body>
 	<Navbar bind:currentTab />
 	{#if "home" === currentTab}
-		<Home />
+		<!-- <Home /> -->
+		<Play />
 	{/if}
 	{#if "addWord" === currentTab}
 		<AddWord />
@@ -24,4 +26,23 @@
 	{#if "listWords" === currentTab}
 		<ListWords />
 	{/if}
-</main>
+</body>
+
+<style>
+	:root {
+		--c1: hsl(45, 88%, 58%);
+		--c2: hsl(45, 85%, 65%);
+		--c3: hsl(39, 89%, 53%);
+		--c4: hsl(33, 50%, 50%);
+		--c5: hsl(27, 30%, 79%);
+	}
+	:global(body) {
+		margin: 0px;
+		border: 0px;
+		padding: 0px;
+	}
+	body {
+		background-color: rgb(7, 60, 78);
+		font-size: 48px;
+	}
+</style>
