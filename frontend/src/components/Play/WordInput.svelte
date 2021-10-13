@@ -1,15 +1,19 @@
 <script lang="ts">
-    import { Button, Card, CardBody } from "sveltestrap";
     import { word, input_word } from "../../store";
 </script>
 
-<main>
-    <Card>
-        <CardBody>
-            <h4>🇫🇷 {$word.fr}</h4>
-            <h4>
-                🇵🇱 <input bind:value={$input_word} />
-            </h4>
-        </CardBody>
-    </Card>
-</main>
+<div class="outer">
+    <div class="div1">🇫🇷 {$word.fr}</div>
+    <div class="div2">
+        🇵🇱 {$input_word}
+    </div>
+</div>
+
+<style>
+    div.outer {
+        background-color: var(--c5);
+        padding: 2rem;
+        border-radius: 2rem;
+        border: 2rem solid var(--c1);
+    }
+</style>

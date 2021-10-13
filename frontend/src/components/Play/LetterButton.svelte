@@ -2,34 +2,41 @@
     import { input_word } from "../../store";
 
     export let char: string;
-    let disabled = true;
+    let disabled = false;
 
     function addLetter() {
         $input_word += char;
     }
 </script>
 
-<button {disabled} on:click={addLetter}>{char}</button>
+<button {disabled} on:click={addLetter}>
+    <div>
+        {char}
+    </div>
+</button>
 
 <style>
+    div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     button {
-        background-color: rgb(32, 140, 167);
+        background-color: var(--c2);
+        display: flex;
         vertical-align: middle;
-        color: rgb(169, 211, 240);
+        align-items: center;
+        color: var(--c4);
         font-family: sans-serif;
-        font-size: 33px;
 
-        border-radius: 15px;
-        border-width: 2px;
-        border-color: rgb(169, 211, 240);
+        border: 0.2rem solid var(--c1);
+        /* border-radius: 0.5rem; */
+        /* border-width: 0.1rem; */
+        /* border-color: var(--c3); */
 
-        width: 50px;
-        height: 50px;
-        padding-top: 0px;
-        padding-right: 0px;
-        padding-bottom: 0px;
-        padding-left: 0px;
-        margin-top: 0px;
-        margin-bottom: 0px;
+        /* width: 2rem; */
+        /* height: 2rem; */
+        padding: 0px;
+        margin: 0px;
     }
 </style>
